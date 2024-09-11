@@ -1,0 +1,578 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap');
+
+
+:root{
+    --Primary: #650D0E;
+    --primaryLight: #8f5758;
+    --Secondary: #D9001A;
+    --Third: #D9D9D9;
+    --Black: #000000;
+
+    --primaryFooter: #6A5E60;
+    --secondaryFooter:#BF4648;
+
+    --radius: 22px;
+}
+
+body{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+*{
+    font-family: 'Archivo Narrow';
+    box-sizing: border-box;
+}
+
+nav {
+    position: relative;
+    width: 100%;
+    top: -1px;
+    z-index: 999;
+    isolation: isolate;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--Primary);
+
+    .burger{
+        display: none;
+        position: relative;
+        width: 42px;
+        height: 34px;
+        cursor: pointer;
+        z-index: 999;
+
+        span{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: var(--Primary);
+            transition: background-color 0.25s ease-in-out;
+
+            &::before,&::after{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 4px;
+                background-color: var(--Primary);
+                transition: transform 0.25s ease-in-out;
+            }
+
+            &::before{
+                transform: translateY(-15px);
+            }
+
+            &::after{
+                transform: translateY(15px);
+            }
+        }
+
+        &.active span{
+            background-color: transparent;
+
+            &::before{
+                transform: translateY(0) rotate(45deg);
+            }
+
+            &::after{
+                transform: translateY(0) rotate(-45deg);
+            }
+        }
+    }
+
+    .menu{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        a{
+            .logoEpso{
+            width: 160px;
+            margin: 10px;
+            }
+        }
+
+        ul {
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            gap: var(--spacing);
+            margin-block: calc(var(--spacing) * 2);
+            transition: all 0.25s ease-in-out;
+            padding: 0;
+
+            li {
+                display: block;
+                margin: 0 90px;
+
+                &.dropdown {
+                    position: relative;
+
+                    .dropdownContent {
+                        position: absolute;
+                        background-color: var(--Secondary);
+                        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+                        z-index: 1;
+                        min-width: 160px;
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.25s ease-in-out; /* Ajout de la transition */
+
+                        a {
+                            display: block;
+                            color: black;
+                            padding: 12px 16px;
+                            text-decoration: none;
+
+                            &:hover {
+                                color: #FFFFFF;
+                            }
+                        }
+                    }
+
+                    &:hover .dropdownContent {
+                        max-height: 200px; /* Taille suffisamment grande pour contenir le contenu */
+                    }
+                }
+
+                a {
+                    display: block;
+                    font-size: 20px;
+                    text-decoration: none;
+                    color: #ffffff;
+                    position: relative;
+                    padding-bottom: 5px;
+                
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        width: 0;
+                        height: 2px;
+                        background-color: #ffffff;
+                        transition: width 0.25s ease-in-out;
+                        transform: translateX(-50%);
+                    }
+                
+                    &:hover::after{
+                        width: 100%;
+                        left: 50%;
+                    }
+            
+                    &:active{
+                        color: var(--Secondary);
+                    }
+            
+                    &:active::after{
+                        width: 100%;
+                        left: 50%;
+                        background-color: var(--Secondary);
+                    }
+                }
+            }
+        }
+    } 
+    
+    @media screen and (max-width:1300px){
+        position: sticky;
+
+        .burger{
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin: 20px;
+            z-index: 999;
+        }
+
+        .menu{
+            position: absolute;
+            top: 0;
+            left: -200vh;
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: 0.5s ease-in-out;
+
+            img{
+                width: 250px;
+                filter: drop-shadow(2px 1px 1px var(--Primary));
+            }
+
+            ul{
+                flex-direction: column;
+
+                li{
+                    margin: 10px;
+                    margin-inline: auto;
+                    a{
+                        font-size: 1.5rem;
+                        color: var(--Primary);
+                    }
+                }
+            }
+
+            &.swipe{
+                left: 0;
+            }
+        }
+    }
+}
+
+header{
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    .titre{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 100px 200px;
+
+        h1{
+            color: var(--Primary);
+            font-size: 46px;
+        }
+    }
+
+    p{
+        position: relative;
+        color: var(--Primary);
+        left:20%;
+        font-size: 30px;
+        margin: 0;
+    }
+
+    img{
+        width: 320px;
+    }
+
+    @media screen and (max-width:1320px) {
+        .titre{
+            width: 80%;
+            margin: 50px auto;
+            img{
+                width: 35%;
+            }
+            h1{
+            font-size: 35px;
+            }
+        }
+    }
+    @media screen and (max-width:860px) {
+        .titre{
+            h1{
+                font-size: 20px;
+            }
+        }
+        p{
+            font-size: 20px;
+        }
+    }
+}
+
+.content{
+    position: relative;
+    text-align: center;
+
+    h3{
+        color: var(--Primary);
+        margin: 50px 0 0 0;
+        font-size: 46px;
+        font-style: italic;
+        filter: drop-shadow(4px 4px 4px var(--Primary));
+    }
+
+    ul{
+        width: 100%;
+        display: flex;
+        margin: 80px auto;
+        padding: 50px;
+        border-radius: var(--radius);
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(.25turn, #0F99AA,#B4D3B4,#FFD34E,#DB9D36,#BD4932);
+
+        li{
+            font-size: 24px;
+            display: flex;
+            width: 15%;
+        }
+    }
+
+    .text{
+
+        p{
+        color: var(--Primary);
+        margin: 50px auto;
+        position: relative;
+        width: 90%;
+        text-align: center;
+        font-size: 34px;
+
+            b{
+                color: red;
+            }
+        }
+
+        .paypal{
+            width: 40%;
+        }
+    }
+
+    .souscription{
+        text-align: left;
+        margin: 50px 0 0 50px;
+        padding: 0;
+
+        p{
+            font-size: 20px;
+        }
+
+        .don{
+            display: flex;
+
+            p{
+                font-size: 24px;
+                color: red;
+            }
+        }
+    }
+
+    @media screen and (max-width:1300px) {
+        .text{
+            p{
+                font-size: 25px;
+            }
+        }
+    }
+
+    @media screen and (max-width:1000px){
+        ul{
+            li{
+                font-size: 17px;
+            }
+        }
+    }
+
+    @media screen and (max-width:750px) {
+        h3{
+            font-size: 35px;
+        }
+        ul{
+            li{
+                font-size: 13px;
+            }
+        }
+        .text{
+            p{
+                font-size: 15px;
+            }
+        }
+    }
+
+    @media screen and (max-width:550px){
+        ul{
+            flex-direction: column;
+            text-align: center;
+            background: linear-gradient(.5turn, #0F99AA,#B4D3B4,#FFD34E,#DB9D36,#BD4932);
+            li{
+                width: 60%;
+                margin: 15px;
+            }
+        }
+        .souscription{
+            .don{
+                display: block;
+                img{
+                    width: 45%;
+                }
+                p{
+                    font-size: 15px;
+                }
+            }
+            p{
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+.partenaires{
+    position: relative;
+
+    h3{
+        margin-left: 50px;
+        font-size: 32px;
+        color: var(--Primary);
+    }
+
+    .logoContainer {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background: linear-gradient(to left ,rgba(255,255,255, 0), #FFFFFF);
+            z-index: 2;
+        }
+
+        &::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background: linear-gradient(to right ,rgba(255,255,255, 0), #FFFFFF);
+            z-index: 2;
+        }
+
+        .logoSlider {
+            display: inline-block;
+            width: max-content;
+            animation: 50s slide infinite linear;
+            align-items: center;
+
+            img {
+                height: 150px;
+                margin: 20px 100px;
+            }
+
+            .specifique{
+                height: 200px;
+                margin: 0 100px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .logoContainer{
+            height: 100px;
+            &::before,&::after{
+                height: 100px;
+                width: 100px;
+            }
+            .logoSlider{
+                img{
+                    height: 100px;
+                    margin: 0 20px;
+                }
+                .specifique{
+                    height: 100px;
+                    margin-inline: 20px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes slide {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+    }
+}
+
+
+footer{
+    position: relative;
+    color: var(--Third);
+    background-color: var(--primaryFooter);
+
+    .inLine{
+        display: flex;
+        margin: 50px;
+        justify-content: space-between;
+
+        .logoEpso{
+            width: 250px;
+            text-align: center;
+
+            img{
+                width: 140px;
+            }
+        }
+
+        h4{
+            font-size: 25px;
+            margin-top: 0;
+        }
+
+        .links{
+            position: relative;
+
+            li{
+                margin:  10px 0;
+            }
+            a{
+                text-decoration: none;
+                color: var(--FooterSec);
+            }
+            
+        }
+
+        .contact{
+            display: flex;
+            align-items: center;
+
+            img{
+                height: 21px;
+                margin: 5px;
+            }
+
+            p{
+                margin: 0;
+            }
+        }
+    } 
+    
+    p{
+        margin: 10px;
+    }
+
+    @media screen and (max-width:520px) {
+        .inLine{
+            flex-direction: column;
+            text-align: center;
+            .logoEpso{
+                margin: 0 auto 50px;
+            }
+            .links{
+                margin-bottom: 50px;
+                h4{
+                    margin: 5px;
+                }
+            }
+            .contact{
+                margin: 5px 30%;
+            }
+        }
+    }
+}

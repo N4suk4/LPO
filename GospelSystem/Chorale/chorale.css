@@ -1,0 +1,594 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+:root {
+  --Primary: #D88817;
+  --PrimaryDark: #85530E;
+  --Black: #000000;
+  --White: #ffffff;
+  --Footer: #54595F;
+  --FooterFont: #d8d8d8;
+  --spacing: 1em;
+  --radius: 22px;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+* {
+  font-family: "Inter";
+  box-sizing: border-box;
+}
+
+nav {
+  position: sticky;
+  width: 100%;
+  align-items: center;
+  top: -1px;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--Footer);
+  z-index: 999;
+}
+nav .burger {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 34px;
+  cursor: pointer;
+  z-index: 9999;
+}
+nav .burger span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--Primary);
+  transition: background-color 0.25s ease-in-out;
+}
+nav .burger span::before, nav .burger span::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: var(--Primary);
+  transition: transform 0.25s ease-in-out;
+}
+nav .burger span::before {
+  transform: translateY(-15px);
+}
+nav .burger span::after {
+  transform: translateY(15px);
+}
+nav .burger.active span {
+  background-color: transparent;
+}
+nav .burger.active span::before {
+  transform: translateY(0) rotate(45deg);
+}
+nav .burger.active span::after {
+  transform: translateY(0) rotate(-45deg);
+}
+nav .menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+nav .menu img {
+  width: 150px;
+  margin: 20px;
+}
+nav .menu ul {
+  width: 100%;
+  justify-content: space-around;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  transition: all 0.25s ease-in-out;
+  padding: 0;
+}
+nav .menu ul li {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: block;
+  color: var(--Primary);
+  margin: 0 90px;
+}
+nav .menu ul li a {
+  font-family: "Kaushan script";
+  width: -moz-fit-content;
+  width: fit-content;
+  display: block;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  position: relative;
+  padding-bottom: 5px;
+}
+nav .menu ul li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--Primary);
+  transition: width 0.25s ease-in-out;
+  transform: translateX(-50%);
+}
+nav .menu ul li a:hover::after {
+  width: 100%;
+  left: 50%;
+}
+nav .menu ul li a:active {
+  color: var(--Secondary);
+}
+nav .menu ul li a:active::after {
+  width: 100%;
+  left: 50%;
+  background-color: var(--Secondary);
+}
+@media screen and (max-width: 1300px) {
+  nav {
+    position: sticky;
+  }
+  nav .burger {
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin: 20px;
+    z-index: 999;
+  }
+  nav .menu {
+    position: absolute;
+    top: 0;
+    left: -200vh;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+    transition: 0.5s ease-in-out;
+  }
+  nav .menu img {
+    width: 250px;
+    filter: drop-shadow(2px 1px 1px var(--Primary));
+  }
+  nav .menu ul {
+    flex-direction: column;
+  }
+  nav .menu ul li {
+    margin: 10px;
+    margin-inline: auto;
+  }
+  nav .menu ul li a {
+    font-size: 1.5rem;
+    color: var(--Primary);
+  }
+  nav .menu.swipe {
+    left: 0;
+  }
+}
+
+header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+header h1 {
+  position: absolute;
+  top: -50px;
+  font-size: 80px;
+  font-weight: lighter;
+  font-family: "Kaushan script";
+  color: var(--White);
+}
+header img {
+  width: 100%;
+  height: 700px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center 35%;
+     object-position: center 35%;
+}
+@media screen and (max-width: 1200px) {
+  header h1 {
+    margin-top: 50px;
+    font-size: 50px;
+  }
+  header img {
+    height: 80%;
+  }
+}
+@media screen and (max-width: 700px) {
+  header h1 {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 500px) {
+  header h1 {
+    font-size: 15px;
+  }
+}
+
+.container {
+  position: relative;
+}
+.container .box {
+  transform: translate(200%);
+  transition: transform 1s ease;
+}
+.container .box:nth-of-type(even) {
+  transform: translate(-200%);
+}
+.container .box.show {
+  transform: translateX(0);
+}
+.container .histContainer {
+  position: relative;
+  height: 400px;
+  left: 100px;
+  margin: 50px;
+}
+.container .histContainer .historique {
+  position: relative;
+  padding: 40px;
+  margin: 20px;
+  left: 20px;
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+.container .histContainer .historique .paragraph h2 {
+  color: var(--Primary);
+}
+.container .histContainer .historique .paragraph p {
+  color: var(--White);
+  width: 600px;
+  text-align: justify;
+}
+.container .histContainer .histBackground {
+  position: absolute;
+  width: 80%;
+  top: 0;
+  left: 40px;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: var(--radius);
+  filter: grayscale(100%) blur(5px) contrast(150%) brightness(80%);
+  z-index: 0;
+}
+.container .assocContainer {
+  position: relative;
+  height: 400px;
+  left: 200px;
+}
+.container .assocContainer .associations {
+  position: relative;
+  padding: 40px;
+  margin: 20px;
+  left: 20px;
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+.container .assocContainer .associations .paragraph h2 {
+  color: var(--Primary);
+}
+.container .assocContainer .associations .paragraph p {
+  color: var(--White);
+  width: 600px;
+  text-align: justify;
+}
+.container .assocContainer .assocBackground {
+  position: absolute;
+  width: 80%;
+  top: 0;
+  left: 40px;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: var(--radius);
+  filter: grayscale(100%) blur(5px) contrast(150%) brightness(80%);
+  z-index: 0;
+}
+.container .pialatContainer {
+  position: relative;
+  height: 400px;
+  left: 100px;
+  margin: 50px;
+}
+.container .pialatContainer .pialat {
+  position: relative;
+  padding: 40px;
+  margin: 20px;
+  left: 20px;
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+.container .pialatContainer .pialat .paragraph h2 {
+  color: var(--Primary);
+}
+.container .pialatContainer .pialat .paragraph p {
+  color: var(--White);
+  width: 600px;
+  text-align: justify;
+}
+.container .pialatContainer .imgPialat {
+  position: relative;
+  text-align: center;
+}
+.container .pialatContainer .imgPialat img {
+  height: 200px;
+  border: solid;
+  border-color: var(--Primary);
+  border-radius: var(--radius);
+}
+.container .pialatContainer .imgPialat a {
+  color: var(--Primary);
+  font-size: 24px;
+  transition: 0.25s;
+}
+.container .pialatContainer .imgPialat a:hover {
+  color: var(--PrimaryDark);
+}
+.container .pialatContainer .pialatBackground {
+  position: absolute;
+  width: 700px;
+  top: 0;
+  left: 40px;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: var(--radius);
+  filter: grayscale(100%) blur(5px) contrast(150%) brightness(80%);
+  z-index: 0;
+}
+.container .details {
+  color: var(--Primary);
+  margin: 0 150px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.container .details .chiffre {
+  font-size: 64px;
+}
+.container .reseaux {
+  display: flex;
+  justify-content: center;
+}
+.container .reseaux a img {
+  width: 52px;
+  margin: 50px;
+}
+@media screen and (max-width: 1400px) {
+  .container .histContainer {
+    left: 0;
+  }
+  .container .histContainer .historique .details {
+    margin: 50px;
+  }
+  .container .assocContainer {
+    left: 0;
+  }
+  .container .assocContainer .associations .details {
+    margin: 50px;
+  }
+  .container .pialatContainer .pialat {
+    flex-direction: column;
+  }
+  .container .pialatContainer .pialat .imgPialat {
+    top: 30px;
+  }
+  .container .pialatContainer .pialat .imgPialat p {
+    margin: 0;
+  }
+  .container .pialatContainer .pialatBackground {
+    left: 150px;
+    width: 60%;
+  }
+  .container .reseaux {
+    position: relative;
+    top: 230px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .container p {
+    font-size: 15px;
+  }
+  .container .box {
+    width: 90%;
+    margin: 0 0 50px 50px;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .container .histContainer .historique {
+    flex-direction: column-reverse;
+  }
+  .container .histContainer .historique .paragraph p {
+    width: 100%;
+  }
+  .container .histContainer .historique .details {
+    font-size: 20px;
+    margin: 0;
+  }
+  .container .histContainer .historique .details .chiffre {
+    font-size: 35px;
+  }
+  .container .assocContainer .associations {
+    flex-direction: column;
+  }
+  .container .assocContainer .associations .paragraph p {
+    width: 100%;
+  }
+  .container .assocContainer .associations .details {
+    font-size: 20px;
+    margin: 0;
+  }
+  .container .assocContainer .associations .details .chiffre {
+    font-size: 35px;
+  }
+  .container .pialatContainer {
+    left: 0px;
+    margin: 0 0 50px 0;
+  }
+  .container .pialatContainer .pialat .paragraph p {
+    font-size: 12px;
+    width: 90%;
+  }
+  .container .pialatContainer .pialatBackground {
+    left: 85px;
+    width: 70%;
+  }
+  .container .reseaux {
+    position: relative;
+    top: 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .container .pialatContainer .pialat {
+    left: 65px;
+  }
+  .container .pialatContainer .pialatBackground {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .container .pialatContainer .pialat .imgPialat img {
+    width: 70%;
+    height: auto;
+  }
+}
+@media screen and (max-width: 450px) {
+  .container p {
+    font-size: 12px;
+  }
+  .container .box {
+    margin: 0 0 50px 0;
+  }
+  .container .histContainer .historique .details {
+    font-size: 15px;
+  }
+  .container .histContainer .historique .details .chiffre {
+    font-size: 25px;
+  }
+  .container .assocContainer .associations .details {
+    font-size: 15px;
+  }
+  .container .assocContainer .associations .details .chiffre {
+    font-size: 25px;
+  }
+  .container .pialatContainer {
+    left: -50px;
+  }
+  .container .pialatContainer .pialat .paragraph p {
+    font-size: 11px;
+  }
+}
+
+footer {
+  position: relative;
+  background-color: var(--Footer);
+}
+footer .inLine {
+  display: flex;
+  width: 100%;
+  margin: 50px;
+  justify-content: space-around;
+}
+footer .inLine .descriptionGS {
+  width: 480px;
+  text-align: center;
+}
+footer .inLine .descriptionGS p {
+  font-size: 20px;
+  color: var(--FooterFont);
+}
+footer .inLine .links {
+  position: relative;
+}
+footer .inLine .links h5 {
+  font-size: 25px;
+  color: var(--FooterFont);
+}
+footer .inLine .links li {
+  margin: 10px 0;
+  color: var(--FooterFont);
+}
+footer .inLine .links a {
+  text-decoration: none;
+  color: var(--FooterFont);
+}
+footer .reseaux {
+  display: flex;
+  justify-content: space-around;
+}
+footer .reseaux a img {
+  width: 52px;
+}
+footer .reseaux p {
+  color: var(--FooterFont);
+}
+@media screen and (max-width: 1650px) {
+  footer .inLine {
+    margin-inline: 0;
+  }
+}
+@media screen and (max-width: 1400px) {
+  footer {
+    top: 200px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  footer {
+    top: 0;
+  }
+}
+@media screen and (max-width: 700px) {
+  footer .inLine .descriptionGS {
+    width: 50%;
+  }
+  footer .inLine .descriptionGS img {
+    width: 100%;
+  }
+  footer .inLine .descriptionGS p {
+    font-size: 13px;
+  }
+  footer .inLine .links {
+    margin-left: 15px;
+  }
+  footer .inLine .links h5 {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  footer .inLine .links li {
+    font-size: 12px;
+  }
+  footer .reseaux p {
+    font-size: 10px;
+  }
+}/*# sourceMappingURL=chorale.css.map */

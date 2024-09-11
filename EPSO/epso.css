@@ -1,0 +1,646 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap");
+:root {
+  --Primary: #650D0E;
+  --Secondary: #D9001A;
+  --Third: #D9D9D9;
+  --Black: #000000;
+  --primaryFooter: #6A5E60;
+  --secondaryFooter:#BF4648;
+  --radius: 22px;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+* {
+  font-family: "Archivo Narrow";
+  box-sizing: border-box;
+}
+
+nav {
+  position: relative;
+  width: 100%;
+  top: -1px;
+  z-index: 999;
+  isolation: isolate;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--Primary);
+}
+nav .burger {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 34px;
+  cursor: pointer;
+  z-index: 999;
+}
+nav .burger span {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--Primary);
+  transition: background-color 0.25s ease-in-out;
+}
+nav .burger span::before, nav .burger span::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: var(--Primary);
+  transition: transform 0.25s ease-in-out;
+}
+nav .burger span::before {
+  transform: translateY(-15px);
+}
+nav .burger span::after {
+  transform: translateY(15px);
+}
+nav .burger.active span {
+  background-color: transparent;
+}
+nav .burger.active span::before {
+  transform: translateY(0) rotate(45deg);
+}
+nav .burger.active span::after {
+  transform: translateY(0) rotate(-45deg);
+}
+nav .menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+nav .menu a .logoEpso {
+  width: 160px;
+  margin: 10px;
+}
+nav .menu ul {
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing);
+  margin-block: calc(var(--spacing) * 2);
+  transition: all 0.25s ease-in-out;
+  padding: 0;
+}
+nav .menu ul li {
+  display: block;
+  margin: 0 90px;
+}
+nav .menu ul li.dropdown {
+  position: relative;
+}
+nav .menu ul li.dropdown .dropdownContent {
+  position: absolute;
+  background-color: var(--Secondary);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  min-width: 160px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-in-out; /* Ajout de la transition */
+}
+nav .menu ul li.dropdown .dropdownContent a {
+  display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+nav .menu ul li.dropdown .dropdownContent a:hover {
+  color: #FFFFFF;
+}
+nav .menu ul li.dropdown:hover .dropdownContent {
+  max-height: 200px; /* Taille suffisamment grande pour contenir le contenu */
+}
+nav .menu ul li a {
+  display: block;
+  font-size: 20px;
+  text-decoration: none;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 5px;
+}
+nav .menu ul li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.25s ease-in-out;
+  transform: translateX(-50%);
+}
+nav .menu ul li a:hover::after {
+  width: 100%;
+  left: 50%;
+}
+nav .menu ul li a:active {
+  color: var(--Secondary);
+}
+nav .menu ul li a:active::after {
+  width: 100%;
+  left: 50%;
+  background-color: var(--Secondary);
+}
+@media screen and (max-width: 1300px) {
+  nav {
+    position: sticky;
+  }
+  nav .burger {
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin: 20px;
+    z-index: 999;
+  }
+  nav .menu {
+    position: absolute;
+    top: 0;
+    left: -200vh;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+    transition: 0.5s ease-in-out;
+  }
+  nav .menu img {
+    width: 250px;
+    filter: drop-shadow(2px 1px 1px var(--Primary));
+  }
+  nav .menu ul {
+    flex-direction: column;
+  }
+  nav .menu ul li {
+    margin: 10px;
+    margin-inline: auto;
+  }
+  nav .menu ul li a {
+    font-size: 1.5rem;
+    color: var(--Primary);
+  }
+  nav .menu.swipe {
+    left: 0;
+  }
+}
+
+header {
+  position: relative;
+  top: -1px;
+  width: 100%;
+  height: 380px;
+  text-align: center;
+  background-image: url(imageEPSO/happyEpso.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 70%;
+}
+header .background {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 15px;
+}
+header .background .backBlur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  filter: blur(10px);
+  border-radius: inherit;
+  z-index: -1;
+}
+header .background p {
+  color: var(--Primary);
+  margin: 0;
+  padding: 5px;
+  font-size: 48px;
+  filter: none;
+}
+
+.container {
+  position: relative;
+  top: -1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container .svg1 {
+  position: absolute;
+  top: 0%;
+  z-index: 2;
+}
+.container .Demarche {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 1000px;
+  background-image: url(imageEPSO/Epso.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 30% 55%;
+}
+.container .Demarche::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+}
+.container .Demarche .dhh {
+  position: relative;
+  width: 370px;
+  height: 220px;
+  text-align: center;
+  border: 2px solid;
+  border-color: var(--Primary);
+  border-radius: var(--radius);
+  background-color: #FFFFFF;
+  box-shadow: 6px 6px 4px rgba(101, 13, 14, 0.5);
+  z-index: 2;
+}
+.container .Demarche .dhh h4 {
+  font-size: 32px;
+  color: var(--Secondary);
+}
+.container .Demarche .dhh h4 .soustitre {
+  font-size: 15px;
+  margin: 0;
+}
+.container .Demarche .dhh p {
+  margin: 0;
+}
+.container .Demarche .demarche {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  left: -25%;
+  margin-top: 170px;
+  transition: transform 0.25s ease-in-out;
+}
+.container .Demarche .demarche h4 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.container .Demarche .demarche li {
+  list-style: none;
+  position: relative;
+  display: inline-block;
+}
+.container .Demarche .demarche li .dropdown {
+  display: block;
+  color: var(--Third);
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px;
+  margin: 5px auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #650d0e;
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 4px rgba(101, 13, 14, 0.5);
+}
+.container .Demarche .demarche li .dropdown:hover {
+  transform: scale(1.1);
+}
+.container .Demarche .demarche li .dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: var(--Secondary);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.container .Demarche .demarche li .dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.container .Demarche .demarche li .dropdownContent a:hover {
+  background-color: #f1f1f1;
+}
+.container .Demarche .demarche li:hover .dropdownContent {
+  display: block;
+}
+@media screen and (max-width: 750px) {
+  .container .Demarche .demarche {
+    left: -10%;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .container .Demarche .demarche {
+    width: 90%;
+    left: 0;
+  }
+}
+.container .Demarche .ligne1 {
+  position: absolute;
+  top: 270px;
+  right: 44.25%;
+  width: 400px;
+  height: 120px;
+  z-index: 1;
+  filter: drop-shadow(6px 6px 4px #650D0E);
+}
+.container .Demarche .bureau h4 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.container .Demarche .bureau p {
+  font-size: 20px;
+  margin: 5px;
+}
+@media screen and (max-width: 520px) {
+  .container .Demarche .bureau {
+    width: 90%;
+  }
+}
+.container .Demarche .ligne2 {
+  position: absolute;
+  top: 610px;
+  left: 44.25%;
+  width: 400px;
+  height: 130px;
+  z-index: 2;
+  filter: drop-shadow(6px 6px 4px #650D0E);
+}
+.container .Demarche .epicerie {
+  position: relative;
+  left: 25%;
+}
+.container .Demarche .epicerie h4 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.container .Demarche .epicerie p {
+  font-size: 20px;
+}
+@media screen and (max-width: 750px) {
+  .container .Demarche .epicerie {
+    left: 10%;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .container .Demarche .epicerie {
+    width: 90%;
+    left: 0;
+  }
+}
+.container .acces {
+  width: 80%;
+  font-size: 24px;
+  text-align: center;
+  color: var(--Primary);
+}
+.container .acces p {
+  margin-top: 50px;
+}
+.container .acces .adherent {
+  font-weight: bold;
+}
+.container .acces ul {
+  text-align: left;
+}
+.container .acces ul li {
+  margin: 10px;
+}
+@media screen and (max-width: 520px) {
+  .container .acces p {
+    font-size: 18px;
+  }
+  .container .acces ul li {
+    font-size: 18px;
+  }
+}
+.container .agenda {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 800px;
+}
+.container .agenda h3 {
+  color: var(--Primary);
+  font-size: 48px;
+}
+.container .agenda iframe {
+  width: 100%;
+  height: 70%;
+  border: none;
+  border-radius: 0 22px 22px 22px;
+  box-shadow: 6px 6px 4px rgba(101, 13, 14, 0.5);
+}
+.container .agenda p {
+  margin: 50px;
+  color: var(--Primary);
+  font-size: 38px;
+  text-align: center;
+}
+@media screen and (max-width: 1200px) {
+  .container .ligne1, .container .ligne2 {
+    display: none;
+  }
+}
+@media screen and (max-width: 520px) {
+  .container .agenda p {
+    font-size: 25px;
+  }
+}
+
+.partenaires {
+  position: relative;
+}
+.partenaires h3 {
+  margin-left: 50px;
+  font-size: 32px;
+  color: var(--Primary);
+}
+.partenaires .logoContainer {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+.partenaires .logoContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), #FFFFFF);
+  z-index: 2;
+}
+.partenaires .logoContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 250px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #FFFFFF);
+  z-index: 2;
+}
+.partenaires .logoContainer .logoSlider {
+  display: inline-block;
+  width: -moz-max-content;
+  width: max-content;
+  animation: 50s slide infinite linear;
+  align-items: center;
+}
+.partenaires .logoContainer .logoSlider img {
+  height: 150px;
+  margin: 20px 100px;
+}
+.partenaires .logoContainer .logoSlider .specifique {
+  height: 200px;
+  margin: 0 100px;
+}
+@media screen and (max-width: 800px) {
+  .partenaires .logoContainer {
+    height: 100px;
+  }
+  .partenaires .logoContainer::before, .partenaires .logoContainer::after {
+    height: 100px;
+    width: 100px;
+  }
+  .partenaires .logoContainer .logoSlider img {
+    height: 100px;
+    margin: 0 20px;
+  }
+  .partenaires .logoContainer .logoSlider .specifique {
+    height: 100px;
+    margin-inline: 20px;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+footer {
+  position: relative;
+  color: var(--Third);
+  background-color: var(--primaryFooter);
+}
+footer .inLine {
+  display: flex;
+  margin: 50px;
+  justify-content: space-between;
+}
+footer .inLine .logoEpso {
+  width: 250px;
+  text-align: center;
+}
+footer .inLine .logoEpso img {
+  width: 140px;
+}
+footer .inLine h4 {
+  font-size: 25px;
+  margin-top: 0;
+}
+footer .inLine .links {
+  position: relative;
+}
+footer .inLine .links li {
+  margin: 10px 0;
+}
+footer .inLine .links a {
+  text-decoration: none;
+  color: var(--FooterSec);
+}
+footer .inLine .contact {
+  display: flex;
+  align-items: center;
+}
+footer .inLine .contact img {
+  height: 21px;
+  margin: 5px;
+}
+footer .inLine .contact p {
+  margin: 0;
+}
+footer .inLine form {
+  display: flex;
+  flex-direction: column;
+}
+footer .inLine form input {
+  margin: 10px auto;
+  width: 90%;
+  height: 5vh;
+  border: solid var(--Primary);
+  border-radius: var(--radius);
+  font-size: 20px;
+}
+footer .inLine form button {
+  margin-inline: auto;
+  width: 58px;
+  font-size: 15px;
+  border: none;
+  border-radius: var(--radius);
+}
+footer .inLine #message {
+  display: none;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+footer p {
+  margin: 10px;
+}
+@media screen and (max-width: 1000px) {
+  footer .inLine {
+    flex-direction: column;
+    text-align: center;
+  }
+  footer .inLine .logoEpso {
+    margin: 0 auto 50px;
+  }
+  footer .inLine .links {
+    margin-bottom: 50px;
+  }
+  footer .inLine .links h4 {
+    margin: 5px;
+  }
+  footer .inLine .contact {
+    margin: 5px 30%;
+  }
+}/*# sourceMappingURL=epso.css.map */
